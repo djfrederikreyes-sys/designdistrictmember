@@ -267,9 +267,9 @@ export default function DesignDistrictDirectory() {
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Design District CPH – Oversigt</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Design District CPH</h1>
           <p className="mt-2 text-zinc-600 dark:text-zinc-300 max-w-2xl">
-            En hurtig og elegant måde at udforske {mode.toLowerCase()} på tværs af lande.
+            En oversigt over brands & udstillere på Design District CPH.
           </p>
         </div>
         <Segmented
