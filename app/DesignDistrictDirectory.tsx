@@ -51,6 +51,7 @@ const MOCK_DATA: DirectoryItem[] = [
   { id: "b-ncp", name: "NCP", type: "Brand", country: "Norge", url: "https://ncp.no/" },
   { id: "b-nordicmodern", name: "Nordic Modern", type: "Brand", country: "Danmark", url: "https://nordicmodern.com/" },
   { id: "b-camoleathers", name: "Camo Leathers", type: "Brand", country: "Danmark", url: "https://www.ca-mo.com/" },
+  { id: "b-hewi", name: "Hewi", type: "Brand", country: "Tyskland", url: "https://www.hewi.com/en" },
 
   // UDSTILLERE
   { id: "e-momentum", name: "Momentum Møbler", type: "Udstiller", country: "Danmark", url: "https://www.momentummobler.dk/" },
@@ -61,6 +62,9 @@ const MOCK_DATA: DirectoryItem[] = [
   { id: "e-nordicmodern", name: "Nordic Modern", type: "Udstiller", country: "Danmark", url: "https://nordicmodern.com/" },
   { id: "e-qqdesign", name: "QQ-Design", type: "Udstiller", country: "Danmark", url: "https://qq-design.dk/" },
   { id: "e-moakk", name: "Moakk", type: "Udstiller", country: "Danmark", url: "https://www.moakk.dk/" },
+  { id: "e-hewi", name: "Hewi", type: "Udstiller", country: "Tyskland", url: "https://www.hewi.com/en" },
+
+
 ];
 
 const ALL_COUNTRIES = ["Danmark", "Spanien", "Italien", "Polen", "Holland", "Norge", "Tjekkiet", "—"];
@@ -269,7 +273,8 @@ export default function DesignDistrictDirectory() {
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Design District CPH</h1>
           <p className="mt-2 text-zinc-600 dark:text-zinc-300 max-w-2xl">
-            En oversigt over brands & udstillere på Design District CPH.
+            Et overblik over vores {mode.toLowerCase()} på tværs af
+            lande.
           </p>
         </div>
         <Segmented

@@ -1,3 +1,5 @@
+const { GitCommit } = require('lucide-react');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
@@ -19,3 +21,4 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+GitCommit
