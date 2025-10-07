@@ -20,7 +20,7 @@ export type DirectoryItem = {
   id: string;
   name: string;
   type: ItemType;
-  country: string; // fx "Danmark", "Spanien"
+  country: string;
   city?: string;
   categories?: string[];
   hall?: string;
@@ -41,9 +41,9 @@ const MOCK_DATA: DirectoryItem[] = [
   { id: "b-elementdesign", name: "Element Design", type: "Brand", country: "Danmark", url: "https://www.elementdesign.dk/" },
   { id: "b-lapodsfactory", name: "La Pods Factory", type: "Brand", country: "—", url: "https://lapodsfactory.com/?lang=en" },
   { id: "b-sitland", name: "Sitland", type: "Brand", country: "Italien", url: "https://www.sitland.com/en/" },
-  { id: "b-Grassoler", name: "Grassoler", type: "Brand", country: "Spanien", url: "https://www.grassoler.com/en/" }, // navn rettet
+  { id: "b-grassoler", name: "Grassoler", type: "Brand", country: "Spanien", url: "https://www.grassoler.com/en/" },
   { id: "b-frezza", name: "Frezza", type: "Brand", country: "Italien", url: "https://www.frezza.com/en/" },
-  { id: "b-boln", name: "Boln", type: "Brand", country: "Spanien", url: "https://boln.eu/en/" }, // land rettet
+  { id: "b-boln", name: "Boln", type: "Brand", country: "Spanien", url: "https://boln.eu/en/" },
   { id: "b-vzor", name: "Vzor", type: "Brand", country: "Polen", url: "https://www.vzor.com/" },
   { id: "b-ldseating", name: "LD Seating", type: "Brand", country: "Tjekkiet", url: "https://ldseating.com/en" },
   { id: "b-mute", name: "Mute.", type: "Brand", country: "Polen", url: "https://www.mute.design/" },
@@ -63,19 +63,19 @@ const MOCK_DATA: DirectoryItem[] = [
   { id: "e-qqdesign", name: "QQ-Design", type: "Udstiller", country: "Danmark", url: "https://qq-design.dk/" },
   { id: "e-moakk", name: "Moakk", type: "Udstiller", country: "Danmark", url: "https://www.moakk.dk/" },
   { id: "e-hewi", name: "Hewi", type: "Udstiller", country: "Tyskland", url: "https://www.hewi.com/en" },
-
-
 ];
 
-const ALL_COUNTRIES = ["Danmark", "Spanien", "Italien", "Polen", "Holland", "Norge", "Tjekkiet", "—"];
+const ALL_COUNTRIES = ["Danmark", "Spanien", "Italien", "Polen", "Holland", "Norge", "Tjekkiet", "Tyskland", "—"];
 
 function classNames(...xs: (string | false | null | undefined)[]) {
   return xs.filter(Boolean).join(" ");
 }
+
 function fuzzyIncludes(hay: string, needle: string) {
   return hay.toLowerCase().includes(needle.trim().toLowerCase());
 }
 
+/* 🔶 ORANGE "Udstillere / Brands"-KNAPPER */
 function Segmented({
   value,
   onChange,
@@ -87,20 +87,23 @@ function Segmented({
 }) {
   return (
     <div className="inline-flex items-center rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">
-      {options.map((opt) => (
-        <button
-          key={opt.value}
-          onClick={() => onChange(opt.value)}
-          className={classNames(
-            "relative px-4 py-2 text-sm font-medium rounded-xl transition",
-            value === opt.value
-              ? "bg-white shadow-sm dark:bg-zinc-900"
-              : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-white"
-          )}
-        >
-          {opt.label}
-        </button>
-      ))}
+      {options.map((opt) => {
+        const active = value === opt.value;
+        return (
+          <button
+            key={opt.value}
+            onClick={() => onChange(opt.value)}
+            className={[
+              "relative px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-200",
+              active
+                ? "bg-[var(--brand)] text-[var(--brand-ink)] shadow-sm"
+                : "text-zinc-700 hover:bg-[var(--brand-ghost)] dark:text-zinc-300",
+            ].join(" ")}
+          >
+            {opt.label}
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -165,6 +168,7 @@ function Dropdown({
   );
 }
 
+/* 🔶 Hver kort-komponent (hover = orange kant + skygge) */
 function DirectoryCard({
   item,
   favorite,
@@ -180,10 +184,9 @@ function DirectoryCard({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
-      className="group relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900"
+      className="group relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-all duration-200 hover:border-[var(--brand)] hover:shadow-lg hover:shadow-[var(--brand-ghost)]"
     >
       <div className="p-4 flex flex-col gap-3">
-        {/* Header row */}
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <h3 className="truncate text-base font-semibold">{item.name}</h3>
@@ -197,19 +200,14 @@ function DirectoryCard({
               </span>
             </div>
           </div>
-
           <button
             onClick={() => toggleFavorite(item.id)}
-            className="p-2 rounded-lg border border-zinc-200 hover:bg-zinc-50 dark:border-zinc-700 dark:hover:bg-zinc-800"
+            className="p-2 rounded-lg border border-zinc-200 hover:bg-[var(--brand-ghost)] dark:border-zinc-700"
             aria-label={favorite ? "Fjern favorit" : "Tilføj favorit"}
           >
-            {favorite ? <Star className="h-4 w-4 fill-current" /> : <StarOff className="h-4 w-4" />}
+            {favorite ? <Star className="h-4 w-4 fill-[var(--brand)]" /> : <StarOff className="h-4 w-4" />}
           </button>
         </div>
-
-        {item.description && (
-          <p className="line-clamp-2 text-sm text-zinc-600 dark:text-zinc-300">{item.description}</p>
-        )}
 
         {item.url && (
           <div className="pt-2">
@@ -217,7 +215,7 @@ function DirectoryCard({
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex text-sm font-medium underline underline-offset-4"
+              className="inline-flex text-sm font-medium underline underline-offset-4 text-[var(--brand)] hover:opacity-80"
             >
               Besøg website
             </a>
@@ -273,8 +271,7 @@ export default function DesignDistrictDirectory() {
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Design District CPH</h1>
           <p className="mt-2 text-zinc-600 dark:text-zinc-300 max-w-2xl">
-            Et overblik over vores {mode.toLowerCase()} på tværs af
-            lande.
+            Et overblik over vores {mode.toLowerCase()} på tværs af lande.
           </p>
         </div>
         <Segmented
@@ -289,9 +286,6 @@ export default function DesignDistrictDirectory() {
 
       <div className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-12">
         <div className="md:col-span-5">
-          <label className="sr-only" htmlFor="search">
-            Søg
-          </label>
           <div className="flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-700 px-3 py-2">
             <Search className="h-4 w-4 opacity-60" />
             <input
@@ -303,51 +297,54 @@ export default function DesignDistrictDirectory() {
             />
           </div>
         </div>
-        <div className="md:col-span-7">
-          <div className="flex flex-wrap items-center gap-2">
-            <Dropdown label="Land" value={country} setValue={setCountry} items={ALL_COUNTRIES} />
-            {(country || query) && (
-              <button
-                onClick={() => {
-                  setCountry(undefined);
-                  setQuery("");
-                }}
-                className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-700 px-3 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-800"
-              >
-                <X className="h-4 w-4" /> Nulstil
-              </button>
-            )}
-            <span className="ml-auto inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-700 px-3 py-2 text-sm">
-              Visning:
-              <button
-                onClick={() => setLayout("grid")}
-                className={classNames(
-                  "p-1 rounded-md",
-                  layout === "grid" ? "bg-zinc-100 dark:bg-zinc-800" : "hover:bg-zinc-50 dark:hover:bg-zinc-800"
-                )}
-                aria-label="Grid"
-              >
-                <Grid2X2 className="h-4 w-4" />
-              </button>
-              <button
-                onClick={() => setLayout("rows")}
-                className={classNames(
-                  "p-1 rounded-md",
-                  layout === "rows" ? "bg-zinc-100 dark:bg-zinc-800" : "hover:bg-zinc-50 dark:hover:bg-zinc-800"
-                )}
-                aria-label="Rows"
-              >
-                <Rows className="h-4 w-4" />
-              </button>
-            </span>
-          </div>
+
+        <div className="md:col-span-7 flex flex-wrap items-center gap-2">
+          <Dropdown label="Land" value={country} setValue={setCountry} items={ALL_COUNTRIES} />
+          {(country || query) && (
+            <button
+              onClick={() => {
+                setCountry(undefined);
+                setQuery("");
+              }}
+              className="inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-700 px-3 py-2 text-sm hover:bg-[var(--brand-ghost)]"
+            >
+              <X className="h-4 w-4" /> Nulstil
+            </button>
+          )}
+          <span className="ml-auto inline-flex items-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-700 px-3 py-2 text-sm">
+            Visning:
+            <button
+              onClick={() => setLayout("grid")}
+              className={classNames(
+                "p-1 rounded-md",
+                layout === "grid"
+                  ? "bg-[var(--brand)] text-[var(--brand-ink)]"
+                  : "hover:bg-[var(--brand-ghost)]"
+              )}
+              aria-label="Grid"
+            >
+              <Grid2X2 className="h-4 w-4" />
+            </button>
+            <button
+              onClick={() => setLayout("rows")}
+              className={classNames(
+                "p-1 rounded-md",
+                layout === "rows"
+                  ? "bg-[var(--brand)] text-[var(--brand-ink)]"
+                  : "hover:bg-[var(--brand-ghost)]"
+              )}
+              aria-label="Rows"
+            >
+              <Rows className="h-4 w-4" />
+            </button>
+          </span>
         </div>
       </div>
 
       <div className="mt-4 flex items-center justify-between text-sm text-zinc-600 dark:text-zinc-400">
         <div>{count === 0 ? "Ingen resultater" : `${count} ${count === 1 ? "resultat" : "resultater"}`}</div>
         <div className="flex items-center gap-2">
-          <Filter className="h-4 w-4" />
+          <Filter className="h-4 w-4 text-[var(--brand)]" />
           <span className="opacity-70">Favoritér kort for din ruteplan</span>
         </div>
       </div>
