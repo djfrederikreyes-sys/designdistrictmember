@@ -53,7 +53,7 @@ const MOCK_DATA: DirectoryItem[] = [
   { id: "b-camoleathers", name: "Camo Leathers", type: "Brand", country: "Danmark", url: "https://www.ca-mo.com/" },
   { id: "b-hewi", name: "Hewi", type: "Brand", country: "Tyskland", url: "https://www.hewi.com/en" },
 
-  // UDSTILLERE
+  // MEMBERS
   { id: "e-momentum", name: "Momentum Møbler", type: "Udstiller", country: "Danmark", url: "https://www.momentummobler.dk/" },
   { id: "e-djust", name: "D-Just", type: "Udstiller", country: "Danmark", url: "https://d-just.dk/" },
   { id: "e-imagecollection", name: "Image Collection", type: "Udstiller", country: "Danmark", url: "https://www.imagecollection.dk/" },
@@ -75,7 +75,7 @@ function fuzzyIncludes(hay: string, needle: string) {
   return hay.toLowerCase().includes(needle.trim().toLowerCase());
 }
 
-/* 🔶 ORANGE "Udstillere / Brands"-KNAPPER */
+/* 🔶 ORANGE "Members / Brands"-KNAPPER */
 function Segmented({
   value,
   onChange,
@@ -227,7 +227,7 @@ function DirectoryCard({
 }
 
 export default function DesignDistrictDirectory() {
-  const [mode, setMode] = useState<"Udstillere" | "Brands">("Udstillere");
+  const [mode, setMode] = useState<"Members" | "Brands">("Members");
   const [query, setQuery] = useState("");
   const [country, setCountry] = useState<string | undefined>();
   const [layout, setLayout] = useState<"grid" | "rows">("grid");
@@ -251,7 +251,7 @@ export default function DesignDistrictDirectory() {
 
   const items = useMemo(() => {
     return MOCK_DATA
-      .filter((it) => (mode === "Udstillere" ? it.type === "Udstiller" : it.type === "Brand"))
+      .filter((it) => (mode === "Members" ? it.type === "Udstiller" : it.type === "Brand"))
       .filter((it) => (country ? it.country === country : true))
       .filter((it) =>
         query
@@ -276,9 +276,9 @@ export default function DesignDistrictDirectory() {
         </div>
         <Segmented
           value={mode}
-          onChange={(v) => setMode(v === "Udstillere" ? "Udstillere" : "Brands")}
+          onChange={(v) => setMode(v === "Members" ? "Members" : "Brands")}
           options={[
-            { label: "Udstillere", value: "Udstillere" },
+            { label: "Members", value: "Members" },
             { label: "Brands", value: "Brands" },
           ]}
         />
