@@ -52,6 +52,11 @@ const MOCK_DATA: DirectoryItem[] = [
   { id: "b-nordicmodern", name: "Nordic Modern", type: "Brand", country: "Danmark", url: "https://nordicmodern.com/" },
   { id: "b-camoleathers", name: "Camo Leathers", type: "Brand", country: "Danmark", url: "https://www.ca-mo.com/" },
   { id: "b-hewi", name: "Hewi", type: "Brand", country: "Tyskland", url: "https://www.hewi.com/en" },
+  { id: "b-kriskadecor", name: "Kriskadecor", type: "Brand", country: "Spanien", url: "https://kriskadecor.com/en/" },
+  { id: "b-tecnografica", name: "Tecnografica", type: "Brand", country: "Italien", url: "https://www.tecnografica.net/en/" },
+  { id: "b-actiu", name: "Actiu", type: "Brand", country: "Spanien", url: "https://www.actiu.com/en/" },
+  { id: "b-evoline", name: "Evoline", type: "Brand", country: "Tyskland", url: "https://www.evoline.com/en/" },
+
 
   // MEMBERS
   { id: "e-momentum", name: "Momentum Møbler", type: "Udstiller", country: "Danmark", url: "https://www.momentummobler.dk/" },
