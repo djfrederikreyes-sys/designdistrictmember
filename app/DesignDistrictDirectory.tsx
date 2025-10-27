@@ -68,6 +68,7 @@ const MOCK_DATA: DirectoryItem[] = [
   { id: "e-qqdesign", name: "QQ-Design", type: "Udstiller", country: "Danmark", url: "https://qq-design.dk/" },
   { id: "e-moakk", name: "Moakk", type: "Udstiller", country: "Danmark", url: "https://www.moakk.dk/" },
   { id: "e-hewi", name: "Hewi", type: "Udstiller", country: "Tyskland", url: "https://www.hewi.com/en" },
+  { id: "e-evoline", name: "Evoline", type: "Udstiller", country: "Tyskland", url: "https://www.evoline.com/en/" },
 ];
 
 const ALL_COUNTRIES = ["Danmark", "Spanien", "Italien", "Polen", "Holland", "Norge", "Tjekkiet", "Tyskland", "—"];
