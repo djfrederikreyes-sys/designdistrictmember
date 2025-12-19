@@ -62,7 +62,6 @@ const MOCK_DATA: DirectoryItem[] = [
   { id: "e-momentum", name: "Momentum Møbler", type: "Udstiller", country: "Danmark", url: "https://www.momentummobler.dk/" },
   { id: "e-djust", name: "D-Just", type: "Udstiller", country: "Danmark", url: "https://d-just.dk/" },
   { id: "e-imagecollection", name: "Image Collection", type: "Udstiller", country: "Danmark", url: "https://www.imagecollection.dk/" },
-  { id: "e-kito", name: "KITO & Co", type: "Udstiller", country: "Danmark", url: "https://kitoco.dk/" },
   { id: "e-lammhultsbd", name: "Lammhults Biblioteksdesign", type: "Udstiller", country: "Danmark", url: "https://bci.dk/" },
   { id: "e-nordicmodern", name: "Nordic Modern", type: "Udstiller", country: "Danmark", url: "https://nordicmodern.com/" },
   { id: "e-qqdesign", name: "QQ-Design", type: "Udstiller", country: "Danmark", url: "https://qq-design.dk/" },
